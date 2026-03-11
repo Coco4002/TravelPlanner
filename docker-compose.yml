@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: travel-planner-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=TravelPlanner123!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/lib/mssql
+
+volumes:
+  sqlserver-data:
