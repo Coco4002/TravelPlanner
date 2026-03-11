@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TravelPlanner.API.Data;
 using TravelPlanner.API.Models;
+using TravelPlanner.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// AI Service
+builder.Services.AddSingleton<AiService>();
+
 // CORS - permite Angular sa comunice cu API-ul
 builder.Services.AddCors(options =>
 {
@@ -60,6 +64,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// Seed roles, admin user, and destinations
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await SeedData.Initialize(services);
+}
 
 if (app.Environment.IsDevelopment())
 {
