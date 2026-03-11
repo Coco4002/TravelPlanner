@@ -1,0 +1,25 @@
+# .NET
+backend/bin/
+backend/obj/
+*.user
+*.suo
+*.vs/
+
+# Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# IDE
+.idea/
+.vscode/
+
+# Docker
+sqlserver-data/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment
+appsettings.Development.json
